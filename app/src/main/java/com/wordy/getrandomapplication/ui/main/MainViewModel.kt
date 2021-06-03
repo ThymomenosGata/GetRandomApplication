@@ -1,4 +1,4 @@
-package com.wordy.getrandomapplication
+package com.wordy.getrandomapplication.ui.main
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData

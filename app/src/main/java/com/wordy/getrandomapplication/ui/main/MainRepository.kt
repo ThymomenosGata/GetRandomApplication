@@ -1,6 +1,7 @@
-package com.wordy.getrandomapplication
+package com.wordy.getrandomapplication.ui.main
 
 import android.graphics.Bitmap
+import com.wordy.getrandomapplication.data.RestClient
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import okhttp3.OkHttpClient

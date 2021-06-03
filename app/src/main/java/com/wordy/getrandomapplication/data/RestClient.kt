@@ -1,11 +1,11 @@
-package com.wordy.getrandomapplication
+package com.wordy.getrandomapplication.data
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import com.wordy.getrandomapplication.GetRandApplication
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import java.io.InputStream
 import java.lang.Exception
 
 class RestClient(private val client: OkHttpClient) {

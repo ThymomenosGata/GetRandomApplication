@@ -1,4 +1,4 @@
-package com.wordy.getrandomapplication
+package com.wordy.getrandomapplication.ui.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,8 +6,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.wordy.getrandomapplication.R
 import kotlinx.android.synthetic.main.activity_main.*
 
+/*
+Тестовое задание:
+
+Необходимо написать приложение с одним экраном,
+на котором отображается случайная картинка из интернета и её размер в байтах.
+Картинка должна отображаться в максимально большом размере без искажения пропорций.
+При нажатии на картинку должна подгрузиться другая случайная картинка.
+Код приложения должен быть рассчитан на дальнейшее развитие, пускай даже архитектура будет избыточной.
+Использовать можно любые библиотеки, кроме Picasso и их аналогов,
+т.е. без использования библиотек специально предназначенных для загрузки картинок.
+*/
 
 class MainActivity : AppCompatActivity() {
 
