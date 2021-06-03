@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 
 class MainRepository {
 
-    val restClient = RestClient(OkHttpClient())
+    private val restClient = RestClient(OkHttpClient())
 
     fun getRandomBitmap(): Single<Bitmap?> {
         return object : Single<Bitmap?>() {
