@@ -6,37 +6,37 @@ import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.InputStream
+import java.lang.Exception
 
-class RestClient {
+class RestClient(private val client: OkHttpClient) {
 
     private val randomImageUrl = "https://picsum.photos/"
-    var client: OkHttpClient? = null
 
-    fun initClient(httpClient: OkHttpClient): RestClient {
-        this.client = httpClient
-        return this
-    }
-
-    fun getRandomImage(url: String): Bitmap {
+    fun getRandomBitmap(): Bitmap? {
+        val url = getUrlForRandomImage()
         val request = Request.Builder()
-            .url(url + (200..1000).random() + "/" + (200..1000).random())
+            .url(url)
             .get()
             .build()
 
-        client?.newCall(request)?.execute().use { response ->
-            return BitmapFactory.decodeStream(response?.body!!.byteStream())
+        client.newCall(request).execute().use { response ->
+            return try {
+                BitmapFactory.decodeStream(response.body?.byteStream())
+            } catch (e: Exception) {
+                Log.d(GetRandApplication.Constants.TAG, e.message.toString())
+                null
+            }
         }
     }
 
-    fun getUrlForRandomImage(): String {
+    private fun getUrlForRandomImage(): String {
         val request = Request.Builder()
-            .url(randomImageUrl)
+            .url(randomImageUrl + (200..1000).random() + "/" + (200..1000).random())
             .get()
             .build()
 
-        client?.newCall(request)?.execute().use { response ->
-            Log.d("RANDOM_IMAGE", response?.body.toString())
-            return response?.request?.url.toString()
+        client.newCall(request).execute().use { response ->
+            return response.request.url.toString()
         }
     }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GetRandomApplication</string>
+    <string name="please_wait">Идет загрузка, пожалуйста подождите...</string>
 </resources>
