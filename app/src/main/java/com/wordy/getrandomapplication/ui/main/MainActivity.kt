@@ -1,6 +1,7 @@
 package com.wordy.getrandomapplication.ui.main
 
-import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
         viewModel.getIsSearchingState().observe(this,
@@ -60,11 +60,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun nextImage(view: View) {
-        loadImage()
+        if (isOnline()) {
+            loadImage()
+        } else {
+            Toast.makeText(this, "Отсутствует подключение к интернету", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun loadImage() {
         viewModel.loadImage()
+    }
+
+    private fun isOnline(): Boolean {
+        val cm: ConnectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            cm.activeNetwork != null
+        } else {
+            cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+        }
     }
 
 }

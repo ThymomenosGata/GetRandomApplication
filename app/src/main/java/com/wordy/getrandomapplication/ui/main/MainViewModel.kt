@@ -21,21 +21,21 @@ class MainViewModel : ViewModel() {
     }
 
     fun loadImage() {
-        isSearchingState.value = true
+        isSearchingState.postValue(true)
         repository.getRandomBitmap()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object: DisposableSingleObserver<Bitmap>() {
+            .subscribe(object : DisposableSingleObserver<Bitmap>() {
                 override fun onSuccess(randImage: Bitmap) {
                     image.value = randImage
                     size.value = "size: ${randImage.byteCount} Byte"
-                    isSearchingState.value = false
+                    isSearchingState.postValue(false)
                 }
 
                 override fun onError(e: Throwable) {
                     error.value = e.message
                     size.value = "size: 0 Byte"
-                    isSearchingState.value = false
+                    isSearchingState.postValue(false)
                 }
 
             })
